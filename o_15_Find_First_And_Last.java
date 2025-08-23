@@ -3,18 +3,34 @@ import java.util.Arrays;
 public class o_15_Find_First_And_Last {
     public int[] searchRange(int[] nums, int target) {
         int[] out = {-1,-1};
-        int count = 0, last = -1;
-        for(int i = 0; i<nums.length; i++){
-            if(nums[i]==target){
-                count++;
-                last = i;
+         int mid, start = 0, end = nums.length-1;
+        while(start <= end){
+            mid = (start+end)/2;
+            if(nums[mid] == target){
+                int i=mid, j=mid;
+                while (nums[i] == target || nums[j] == target) {
+                    System.out.println(i + " " + j);
+                    
+                    
+                    if(nums[i] == target){
+                        out[0]=i;
+                        i--;
+                    }
+                    if(nums[j] == target){
+                        out[1]=j;
+                        j++;
+                    }
+                    
+                    
+                   
+                }
+                return out;
             }
-        }
-        if(last == -1){
-            out[0] = -1;
-        }else{
-            out[0] = last-count+1;
-            out[1] = last;
+            if(target<nums[mid]){
+                end = mid-1;
+            }else{
+                start = mid+1;
+            }
         }
 
         return out;
